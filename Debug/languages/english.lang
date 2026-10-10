@@ -820,6 +820,9 @@ Tall-nut's voice trails off and he smiles knowingly.
 [TOM]
 Tom
 
+[TOM_TOOLTIP]
+
+
 [TOM_DESCRIPTION_HEADER]
 Tom is a heavy-duty wall plant that can't be vaulted over.
 
@@ -1987,7 +1990,7 @@ the faster you can grow plants!
 The shovel needs time to refresh before digging again
 
 [ADVICE_HUGE_WAVE]
-A HUGE WAVE OF ZOMBIES IS APPROACHING!
+TOTAL MADNESS!
 
 [ADVICE_CLICK_PEASHOOTER]
 Click on the peashooter to plant another one!
@@ -2609,8 +2612,12 @@ If you experience slower performance, please disable Hardware Acceleration.
 [NO_RESOURCE_PACK]
 None
 
-[RESOURCE_PACK_EXAMPLE]
-Example
+[RESOURCE_PACK_SMILE]
+Smile Shroom
+
+[RESOURCE_PACK_GARG]
+GARG
+
 
 [AWW_YEAH_BUTTON]
 AWW YEAH!

@@ -188,8 +188,8 @@ public:
     bool                    mSquished;                      
     bool                    mIsAsleep;                      
     bool                    mIsOnBoard;                     
-    bool                    mHighlighted;                   
-
+    bool                    mHighlighted;
+    bool                    mFlipped;
 public:
     Plant();
 
@@ -239,6 +239,7 @@ public:
     void                    LaunchStarFruit();
     bool                    FindStarFruitTarget();
     void                    UpdateChomper();
+    void                    UpdateGarg();
     void                    DoBlink();
     void                    UpdateBlink();
     void                    PlayBodyReanim(const char* theTrackName, ReanimLoopType theLoopType, int theBlendTime, float theAnimRate);
@@ -257,7 +258,7 @@ public:
     int                     DistanceToClosestZombie();
     void                    UpdateSpikeweed();
     void                    MagnetShroomAttactItem(Zombie* theZombie);
-    void                    UpdateSunShroom();
+    void                    UpdateGoldBloom();
     void                    UpdateBowling();
     void                    AnimatePumpkin();
     void                    UpdateBlover();

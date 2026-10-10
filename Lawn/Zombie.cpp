@@ -51,7 +51,8 @@ ZombieDefinition gZombieDefs[NUM_ZOMBIE_TYPES] = {
     { ZOMBIE_JALAPENO_HEAD,     REANIM_ZOMBIE,              3,      99,     10,     1000,   _S("JALAPENO_ZOMBIE")},
     { ZOMBIE_GATLING_HEAD,      REANIM_ZOMBIE,              3,      99,     10,     2000,   _S("GATLING_ZOMBIE")},
     { ZOMBIE_SQUASH_HEAD,       REANIM_ZOMBIE,              3,      99,     10,     2000,   _S("SQUASH_ZOMBIE")},
-    { ZOMBIE_TALLNUT_HEAD,      REANIM_ZOMBIE,              4,      99,     10,     2000,   _S("TALLNUT_ZOMBIE")}
+    { ZOMBIE_TALLNUT_HEAD,      REANIM_ZOMBIE,              4,      99,     10,     2000,   _S("TALLNUT_ZOMBIE")},
+     { ZOMBIE_GARGZOM,      REANIM_GARG,              1,      1,     1,      3400,   _S("ZOMBIE")},
 };
 
 static ZombieType gBossZombieList[] = {  
@@ -66,7 +67,8 @@ static ZombieType gBossZombieList[] = {
     ZombieType::ZOMBIE_POGO,
     ZombieType::ZOMBIE_NEWSPAPER,
     ZombieType::ZOMBIE_DOOR,
-    ZombieType::ZOMBIE_GARGANTUAR
+    ZombieType::ZOMBIE_REDEYE_GARGANTUAR,
+     ZombieType::ZOMBIE_GARGZOM,
 };
 
 ZombieDefinition& GetZombieDefinition(ZombieType theZombieType)
@@ -707,6 +709,11 @@ void Zombie::ZombieInitialize(int theRow, ZombieType theType, bool theVariant, Z
         break;
     }
 
+    case ZombieType::ZOMBIE_GARGZOM:
+        PickRandomSpeed();
+        mBodyHealth = 310;
+        break;
+
     case ZombieType::ZOMBIE_JALAPENO_HEAD:  
     {
         LoadPlainZombieReanim();
@@ -1095,6 +1102,10 @@ void Zombie::PickRandomSpeed()
     if (mZombieType == ZombieType::ZOMBIE_TRASH)
     {
         mVelX = 0.1f;
+    }
+    else if (mZombieType == ZombieType::ZOMBIE_GARGZOM)
+    {
+        mVelX = 0.5f;
     }
     else if (mZombiePhase == ZombiePhase::PHASE_DOLPHIN_WALKING_IN_POOL)
     {
@@ -8045,6 +8056,8 @@ bool Zombie::ZombieTypeCanGoInPool(ZombieType theZombieType)
     return 
         theZombieType == ZombieType::ZOMBIE_NORMAL || 
         theZombieType == ZombieType::ZOMBIE_TRAFFIC_CONE || 
+        theZombieType == ZombieType::ZOMBIE_TRASH ||
+        theZombieType == ZombieType::ZOMBIE_GARGZOM ||
         theZombieType == ZombieType::ZOMBIE_PAIL || 
         theZombieType == ZombieType::ZOMBIE_FLAG || 
         theZombieType == ZombieType::ZOMBIE_SNORKEL || 

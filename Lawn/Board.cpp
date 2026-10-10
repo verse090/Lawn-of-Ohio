@@ -619,7 +619,7 @@ void Board::PickZombieWaves()
 		else if (aGameMode == GameMode::GAMEMODE_CHALLENGE_WALLNUT_BOWLING || aGameMode == GameMode::GAMEMODE_CHALLENGE_AIR_RAID ||
 				 aGameMode == GameMode::GAMEMODE_CHALLENGE_GRAVE_DANGER || aGameMode == GameMode::GAMEMODE_CHALLENGE_HIGH_GRAVITY ||
 				 aGameMode == GameMode::GAMEMODE_CHALLENGE_PORTAL_COMBAT || aGameMode == GameMode::GAMEMODE_CHALLENGE_WAR_AND_PEAS ||
-				 aGameMode == GameMode::GAMEMODE_CHALLENGE_INVISIGHOUL)
+				 aGameMode == GameMode::GAMEMODE_CHALLENGE_INVISIGHOUL || aGameMode == GameMode::GAMEMODE_CHALLENGE_TEST)
 			mNumWaves = 20;
 		else if (mApp->IsStormyNightLevel() || mApp->IsLittleTroubleLevel() || mApp->IsBungeeBlitzLevel() ||
 				 aGameMode == GameMode::GAMEMODE_CHALLENGE_COLUMN || mApp->IsShovelLevel() || aGameMode == GameMode::GAMEMODE_CHALLENGE_WAR_AND_PEAS_2 ||
@@ -911,6 +911,10 @@ void Board::PickBackground()
 		mBackground = BackgroundType::BACKGROUND_1_DAY;
 		break;
 
+	case GameMode::GAMEMODE_CHALLENGE_TEST:
+		mBackground = BackgroundType::BACKGROUND_2_NIGHT;
+		break;
+
 	case GameMode::GAMEMODE_SURVIVAL_NORMAL_STAGE_2:
 	case GameMode::GAMEMODE_SURVIVAL_HARD_STAGE_2:
 	case GameMode::GAMEMODE_SURVIVAL_ENDLESS_STAGE_2:
@@ -1081,7 +1085,7 @@ void Board::PickBackground()
 	MTRand aLevelRNG(GetLevelRandSeed());
 	if (StageHasGraveStones())
 	{
-		if (mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_GRAVE_DANGER)
+		if (mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_GRAVE_DANGER || mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_TEST)
 		{
 			AddGraveStones(6, RandRangeInt(1, 2), aLevelRNG);
 			AddGraveStones(7, RandRangeInt(1, 3), aLevelRNG);
@@ -1373,6 +1377,10 @@ void Board::InitLevel()
 	{
 		mSunMoney = 5000;
 	}
+	else if (aGameMode == GameMode::GAMEMODE_CHALLENGE_TEST)
+	{
+		mSunMoney = 500;
+	}
 	else if (mApp->IsIZombieLevel())
 	{
 		mSunMoney = 150;
@@ -1427,6 +1435,16 @@ void Board::InitLevel()
 		mSeedBank->mSeedPackets[3].SetPacketType(SeedType::SEED_REPEATER);
 		mSeedBank->mSeedPackets[4].SetPacketType(SeedType::SEED_SNOWPEA);
 		mSeedBank->mSeedPackets[5].SetPacketType(SeedType::SEED_CHOMPER);
+	}
+	else if (aGameMode == GameMode::GAMEMODE_CHALLENGE_TEST)
+	{
+		TOD_ASSERT(mSeedBank->mNumPackets == 6);
+		mSeedBank->mSeedPackets[0].SetPacketType(SeedType::SEED_SUNSHROOM);
+		mSeedBank->mSeedPackets[1].SetPacketType(SeedType::SEED_PUFFSHROOM);
+		mSeedBank->mSeedPackets[2].SetPacketType(SeedType::SEED_ANTI_GARG);
+		mSeedBank->mSeedPackets[3].SetPacketType(SeedType::SEED_ANTI_GARG);
+		mSeedBank->mSeedPackets[4].SetPacketType(SeedType::SEED_ANTI_GARG);
+		mSeedBank->mSeedPackets[5].SetPacketType(SeedType::SEED_ANTI_GARG);
 	}
 	else if (aGameMode == GameMode::GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
 	{
@@ -1643,7 +1661,7 @@ bool Board::ChooseSeedsOnCurrentLevel()
 	if (mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_ICE || 
 		mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_BEGHOULED ||
 		mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_BEGHOULED_TWIST || 
-		mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
+		mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_ZOMBIQUARIUM || mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_TEST)
 		return false;
 
 	if (mApp->IsIZombieLevel() || mApp->IsSlotMachineLevel())
@@ -2113,8 +2131,7 @@ Plant* Board::AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedTyp
 		theSeedType == SeedType::SEED_SNOWPEA ||
 		theSeedType == SeedType::SEED_REPEATER ||
 		theSeedType == SeedType::SEED_THREEPEATER ||
-		theSeedType == SeedType::SEED_SPLITPEA ||
-		theSeedType == SeedType::SEED_GATLINGPEA)
+		theSeedType == SeedType::SEED_SPLITPEA)
 	{
 		mPeashootersUsed = true;
 	}
@@ -2122,7 +2139,8 @@ Plant* Board::AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedTyp
 	if (theSeedType == SeedType::SEED_CABBAGEPULT ||
 		theSeedType == SeedType::SEED_KERNELPULT ||
 		theSeedType == SeedType::SEED_MELONPULT ||
-		theSeedType == SeedType::SEED_WINTERMELON)
+		theSeedType == SeedType::SEED_WINTERMELON ||
+		theSeedType == SeedType::SEED_GATLINGPEA)
 	{
 		mCatapultsUsed = true;
 	}
@@ -2451,7 +2469,7 @@ ZombieType Board::PickZombieType(int theZombiePoints, int theWaveIndex, ZombiePi
 				continue;
 			}
 		}
-		else if (aGameMode != GameMode::GAMEMODE_CHALLENGE_POGO_PARTY && aGameMode != GameMode::GAMEMODE_CHALLENGE_BOBSLED_BONANZA && aGameMode != GameMode::GAMEMODE_CHALLENGE_AIR_RAID)
+		else if (aGameMode != GameMode::GAMEMODE_CHALLENGE_POGO_PARTY && aGameMode != GameMode::GAMEMODE_CHALLENGE_BOBSLED_BONANZA && aGameMode != GameMode::GAMEMODE_CHALLENGE_AIR_RAID && aGameMode != GameMode::GAMEMODE_CHALLENGE_TEST)
 		{
 			int aFirstAllowedWave = aZombieDef.mFirstAllowedWave;
 			if (mApp->IsSurvivalEndless(aGameMode))
@@ -2497,7 +2515,7 @@ ZombieType Board::PickZombieType(int theZombiePoints, int theWaveIndex, ZombiePi
 			}
 			else if (aZombieType == ZombieType::ZOMBIE_NORMAL)
 			{
-				aPickWeight = TodAnimateCurve(10, 50, aFlags, aPickWeight, aPickWeight / 10, TodCurves::CURVE_LINEAR);
+		     aPickWeight = TodAnimateCurve(10, 50, aFlags, aPickWeight, aPickWeight / 10, TodCurves::CURVE_LINEAR);
 			}
 			else if (aZombieType == ZombieType::ZOMBIE_TRAFFIC_CONE)
 			{
@@ -3764,7 +3782,6 @@ void Board::MouseDownWithPlant(int x, int y, int theClickCount)
 			aNormalPlant->Die();
 		}
 	}
-
 	if (mCursorObject->mCursorType == CursorType::CURSOR_TYPE_PLANT_FROM_GLOVE)
 	{
 		mApp->mZenGarden->MovePlant(mPlants.DataArrayTryToGet(mCursorObject->mGlovePlantID), aGridX, aGridY);
@@ -8848,6 +8865,10 @@ int Board::GetNumSeedsInBank()
 	{
 		return 6;
 	}
+	if (mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_TEST)
+	{
+		return 6;
+	}
 	if (mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_BEGHOULED || mApp->mGameMode == GameMode::GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
 	{
 		return 0;
@@ -9476,7 +9497,7 @@ void Board::DropLootPiece(int thePosX, int thePosY, int theDropFactor)
 {
 	if (mApp->IsFirstTimeAdventureMode())
 	{
-		if (mLevel == 22 && mCurrentWave > 5 && !mApp->mPlayerInfo->mHasUnlockedMinigames && CountCoinByType(CoinType::COIN_PRESENT_MINIGAMES) == 0)
+		if (mLevel == 1 && mCurrentWave <100 && !mApp->mPlayerInfo->mHasUnlockedMinigames && CountCoinByType(CoinType::COIN_PRESENT_MINIGAMES) == 0)
 		{
 			mApp->PlayFoley(FoleyType::FOLEY_ART_CHALLENGE);
 			AddCoin(thePosX, thePosY, CoinType::COIN_PRESENT_MINIGAMES, CoinMotion::COIN_MOTION_COIN);
@@ -9491,7 +9512,7 @@ void Board::DropLootPiece(int thePosX, int thePosY, int theDropFactor)
 	}
 
 	int aDropHit = Rand(30000);
-	if (mApp->IsFirstTimeAdventureMode() && mLevel == 11 && !mDroppedFirstCoin && mCurrentWave > 5)
+	if (mApp->IsFirstTimeAdventureMode() && mLevel == 1 && !mDroppedFirstCoin && mCurrentWave > 5)
 	{
 		aDropHit = 1000;
 	}
@@ -9577,7 +9598,7 @@ void Board::DropLootPiece(int thePosX, int thePosY, int theDropFactor)
 	if (mApp->IsWallnutBowlingLevel() && Coin::IsMoney(aCoinType))
 		return;
 
-	if (mApp->IsFirstTimeAdventureMode() && mLevel == 11)
+	if (mApp->IsFirstTimeAdventureMode() && mLevel == 1)
 	{
 		int aMoney = Coin::GetCoinValue(CoinType::COIN_GOLD) * mLawnMowers.mSize;
 		int aCost = StoreScreen::GetItemCost(StoreItem::STORE_ITEM_PACKET_UPGRADE);

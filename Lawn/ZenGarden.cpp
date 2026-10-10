@@ -1175,6 +1175,10 @@ float ZenGarden::PlantPottedDrawHeightOffset(SeedType theSeedType, float theScal
     {
         aScaleOffsetFix += 0.0f;
     }
+    else if (theSeedType == SeedType::SEED_ANTI_GARG)
+    {
+        aScaleOffsetFix += 0.0f;
+    }
     else if (theSeedType == SeedType::SEED_HYPNOSHROOM || theSeedType == SeedType::SEED_MARIGOLD || theSeedType == SeedType::SEED_PEASHOOTER || 
         theSeedType == SeedType::SEED_LEFTPEATER || theSeedType == SeedType::SEED_SNOWPEA || 
         theSeedType == SeedType::SEED_THREEPEATER || theSeedType == SeedType::SEED_SUNFLOWER || theSeedType == SeedType::SEED_MARIGOLD)
@@ -2070,7 +2074,8 @@ bool ZenGarden::MouseDownZenGarden(int x, int y, int theClickCount, HitResult* t
     {
         WakeStinky();
     }
-    else if (mBoard->mCursorObject->mCursorType == CursorType::CURSOR_TYPE_GLOVE)
+    else if (mBoard->mCursorObject->mCursorType == CursorType::CURSOR_TYPE_GLOVE
+        )
     {
         if (mBoard->CanUseGameObject(GameObjectType::OBJECT_TYPE_WHEELBARROW))
         {

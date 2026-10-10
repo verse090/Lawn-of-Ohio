@@ -178,7 +178,7 @@ public:
 	bool							mHelpDisplayed[NUM_ADVICE_TYPES];						
 	AdviceType						mHelpIndex;												
 	bool							mFinalBossKilled;										
-	bool							mShowShovel;											
+	bool							mShowShovel;	
 	int								mCoinBankFadeCount;										
 	DebugTextMode					mDebugTextMode;											
 	bool							mLevelComplete;											

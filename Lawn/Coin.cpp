@@ -194,7 +194,8 @@ void Coin::CoinInitialize(int theX, int theY, CoinType theCoinType, CoinMotion t
                 SeedType::SEED_REPEATER,
                 SeedType::SEED_POTATOMINE,
                 SeedType::SEED_SNOWPEA,
-                SeedType::SEED_CHOMPER
+                SeedType::SEED_CHOMPER,
+                SeedType::SEED_ANTI_GARG
             };
             
             SeedType aSeedType = (SeedType)TodPickFromArray((int*)aSeedList, LENGTH(aSeedList));
@@ -1284,7 +1285,7 @@ void Coin::Collect()
     }
 
     AttachmentDetachCrossFadeParticleType(mAttachmentID, ParticleEffect::PARTICLE_COIN_PICKUP_ARROW, nullptr);
-    if (mApp->IsFirstTimeAdventureMode() && mBoard && mBoard->mLevel == 11 && (mType == CoinType::COIN_GOLD || mType == CoinType::COIN_SILVER))
+    if (mApp->IsFirstTimeAdventureMode() && mBoard && mBoard->mLevel == 1 && (mType == CoinType::COIN_GOLD || mType == CoinType::COIN_SILVER))
     {
         mBoard->DisplayAdvice(_S("[ADVICE_CLICKED_ON_COIN]"), MessageStyle::MESSAGE_STYLE_HINT_FAST, AdviceType::ADVICE_CLICKED_ON_COIN);
     }
@@ -1302,7 +1303,7 @@ int Coin::GetSunValue()
 
 int Coin::GetCoinValue(CoinType theCoinType)
 {
-    return theCoinType == CoinType::COIN_SILVER ? 1 : theCoinType == CoinType::COIN_GOLD ? 5 : theCoinType == CoinType::COIN_DIAMOND ? 100 : 0;
+    return theCoinType == CoinType::COIN_SILVER ? 10 : theCoinType == CoinType::COIN_GOLD ? 100 : theCoinType == CoinType::COIN_DIAMOND ? 1000 : 0;
 }
 
 void Coin::PlayLaunchSound()
@@ -1484,7 +1485,7 @@ bool Coin::CoinGetsBouncyArrow()
 
     if (mType == CoinType::COIN_SILVER || mType == CoinType::COIN_GOLD)
     {
-        if (mApp->IsFirstTimeAdventureMode() && mBoard && mBoard->mLevel == 11 && !mBoard->mDroppedFirstCoin)
+        if (mApp->IsFirstTimeAdventureMode() && mBoard && mBoard->mLevel == 1 && !mBoard->mDroppedFirstCoin)
         {
             return true;
         }

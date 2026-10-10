@@ -113,10 +113,10 @@ ReanimationParams gLawnReanimationArray[(int)ReanimationType::NUM_REANIMS] = {
 	{ ReanimationType::REANIM_IMITATER,                             "reanim\\Imitater.reanim",                          0 },
 	{ ReanimationType::REANIM_YETI,                                 "reanim\\Zombie_yeti.reanim",                       0 },
 	{ ReanimationType::REANIM_BOSS_DRIVER,                          "reanim\\Zombie_Boss_driver.reanim",                0 },
-	{ ReanimationType::REANIM_LAWN_MOWERED_ZOMBIE,                  "reanim\\LawnMoweredZombie.reanim",                 0 },
+	{ ReanimationType::REANIM_LAWN_MOWERED_ZOMBIE,                  "reanim\\LawnMoweredZombie1.reanim",                 0 },
 	{ ReanimationType::REANIM_CRAZY_DAVE,                           "reanim\\CrazyDave.reanim",                         1 },
 	{ ReanimationType::REANIM_TEXT_FADE_ON,                         "reanim\\TextFadeOn.reanim",                        0 },
-	{ ReanimationType::REANIM_HAMMER,                               "reanim\\Hammer.reanim",                            0 },
+	{ ReanimationType::REANIM_HAMMER,                               "reanim\\HammerPan.reanim",                            0 },
 	{ ReanimationType::REANIM_SLOT_MACHINE_HANDLE,                  "reanim\\SlotMachine.reanim",                       0 },
 	{ ReanimationType::REANIM_CREDITS_FOOTBALL,                     "reanim\\Credits_Football.reanim",                  1 },
 	{ ReanimationType::REANIM_CREDITS_JACKBOX,                      "reanim\\Credits_Jackbox.reanim",                   1 },
@@ -172,6 +172,15 @@ ReanimationParams gLawnReanimationArray[(int)ReanimationType::NUM_REANIMS] = {
 	{ ReanimationType::REANIM_TOMBOWL,							    "reanim\\TomBowl.reanim",							0 },
 	{ ReanimationType::REANIM_TOM,							        "reanim\\Tom.reanim",							0 },
 	{ ReanimationType::REANIM_HONEY,							    "reanim\\HoneyPot.reanim",							0 },
+	{ ReanimationType::REANIM_GOLDBLOOM,							    "reanim\\GoldBloom.reanim",							0 },
+	{ ReanimationType::REANIM_BONKCHOY,							    "reanim\\BonkChoy.reanim",							0 },
+	{ ReanimationType::REANIM_ELEPHANT,							    "reanim\\Elephant.reanim",							0 },
+	{ ReanimationType::REANIM_PIZZA,							    "reanim\\PizzaCal.reanim",							0 },
+	{ ReanimationType::REANIM_GARG,							    "reanim\\ZombieGarg.reanim",							0 },
+	{ ReanimationType::REANIM_COMMANDO,							    "reanim\\Commando.reanim",							0 },
+	{ ReanimationType::REANIM_ANTIGARG,							    "reanim\\AntiGarg.reanim",							0 },
+	{ ReanimationType::REANIM_PETAH,							    "reanim\\PetahMine.reanim",							0 },
+	{ ReanimationType::REANIM_SKYSHOOTER,							    "reanim\\SkyShooter.reanim",							0 },
 };
 
 static std::map<Image*, std::string> gImagePathCache;

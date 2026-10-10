@@ -1212,8 +1212,8 @@ void GameSelector::KeyChar(char theChar)
 	{
 		TodTraceAndLog(_S("Selector cheat key '%c'"), theChar);
 
-		mApp->mPlayerInfo->mFinishedAdventure = 2;
-		mApp->mPlayerInfo->AddCoins(50000);
+		mApp->mPlayerInfo->mFinishedAdventure = 1000;
+		mApp->mPlayerInfo->AddCoins(990000);
 		mApp->mPlayerInfo->mHasUsedCheatKeys = true;
 		mApp->mPlayerInfo->mHasUnlockedMinigames = true;
 		mApp->mPlayerInfo->mHasUnlockedPuzzleMode = true;
@@ -1472,6 +1472,7 @@ void GameSelector::AddPreviewProfiles()
 	aProfile = mApp->mProfileMgr->AddProfile(_S("2 Night"));
 	if (aProfile)
 	{
+		aProfile->mHasUnlockedMinigames = 1;
 		aProfile->mLevel = 11;
 		aProfile->SaveDetails();
 	}
@@ -1494,6 +1495,7 @@ void GameSelector::AddPreviewProfiles()
 		aProfile->mHasUnlockedSurvivalMode = 1;
 		aProfile->mPurchases[StoreItem::STORE_ITEM_PACKET_UPGRADE] = 2;
 		aProfile->mPurchases[StoreItem::STORE_ITEM_POOL_CLEANER] = 1;
+		aProfile->mPurchases[StoreItem::STORE_ITEM_GARDENING_GLOVE] = 1;
 		aProfile->mCoins = 400;
 		aProfile->SaveDetails();
 	}
@@ -1534,7 +1536,6 @@ void GameSelector::AddPreviewProfiles()
 		aProfile->AddCoins(50000);
 		aProfile->mPurchases[StoreItem::STORE_ITEM_FERTILIZER] = PURCHASE_COUNT_OFFSET + 5;
 		aProfile->mPurchases[StoreItem::STORE_ITEM_BUG_SPRAY] = PURCHASE_COUNT_OFFSET + 5;
-		aProfile->mPurchases[StoreItem::STORE_ITEM_CHOCOLATE] = PURCHASE_COUNT_OFFSET + 5;
 		aProfile->mPurchases[StoreItem::STORE_ITEM_TREE_FOOD] = PURCHASE_COUNT_OFFSET + 5;
 		aProfile->mHasUnlockedMinigames = 1;
 		aProfile->mHasUnlockedPuzzleMode = 1;

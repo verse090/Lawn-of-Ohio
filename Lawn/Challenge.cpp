@@ -265,6 +265,15 @@ ZombieAllowedLevels gZombieAllowedLevels[NUM_ZOMBIE_TYPES] = {
 	{ ZOMBIE_GATLING_HEAD, {}},
 	{ ZOMBIE_SQUASH_HEAD, {}},
 	{ ZOMBIE_TALLNUT_HEAD, {}},
+	{ ZOMBIE_GARGZOM,
+		{
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		}
+	},
 };
 
 SeedType gArtChallengeWallnut[MAX_GRID_SIZE_Y][MAX_GRID_SIZE_X] = {  
@@ -443,6 +452,12 @@ void Challenge::StartLevel()
 		mBoard->mSeedBank->AddSeed(SEED_WALLNUT);
 		mConveyorBeltCounter = 400;
 		mShowBowlingLine = true;
+	}
+	if (aGameMode == GAMEMODE_CHALLENGE_TEST)
+	{
+		mBoard->mZombieCountDown = 5000;
+		mBoard->mZombieCountDownStart = mBoard->mZombieCountDown;
+		mApp->mMusic->MakeSureMusicIsPlaying(MUSIC_TUNE_CONVEYER);
 	}
 	if (aGameMode == GAMEMODE_CHALLENGE_SHOVEL || aGameMode == GAMEMODE_CHALLENGE_SQUIRREL)
 	{
@@ -2498,6 +2513,7 @@ void Challenge::InitZombieWaves()
 				aList[ZOMBIE_NORMAL] = true;
 				aList[ZOMBIE_TRAFFIC_CONE] = true;
 				aList[ZOMBIE_TRASH] = true;
+				aList[ZOMBIE_GARGZOM] = true;
 			}
 			else
 			{
@@ -2505,9 +2521,16 @@ void Challenge::InitZombieWaves()
 				aList[ZOMBIE_TRAFFIC_CONE] = true;
 				aList[ZOMBIE_TRASH] = true;
 				aList[ZOMBIE_PAIL] = true;
+				aList[ZOMBIE_GARGZOM] = true;
 			}
 		}
 		else InitZombieWavesSurvival();
+	}
+	else if (aGameMode == GAMEMODE_CHALLENGE_TEST)
+	{
+
+		aList[ZOMBIE_GARGANTUAR] = true;
+		aList[ZOMBIE_REDEYE_GARGANTUAR] = true;
 	}
 	else if (aGameMode == GAMEMODE_CHALLENGE_SPEED)
 	{
@@ -2927,6 +2950,7 @@ void Challenge::SpawnZombieWave()
 			}
 			if (aWaveZombie == ZOMBIE_FLAG)
 			{
+
 				mBoard->mZombiesInWave[mBoard->mCurrentWave][i] = ZOMBIE_NORMAL;
 			}
 		}

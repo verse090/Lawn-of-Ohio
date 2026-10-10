@@ -181,13 +181,14 @@
 <Image id="PLANTSPEECHBUBBLE" path="plantspeechbubble" />
 <Image id="WATERDROP" path="waterdrop" />
 <Image id="TREEFOOD" path="TreeFood" />
-<Image id="PACKET_PLANTS" path="packet_plants" cols="13" />
+<Image id="PACKET_PLANTS" path="packet_plants" cols="76" />
 <Image id="ZEN_NEED_ICONS" path="zen_need_icons" cols="3" />
 <Image id="SQUIRREL" path="squirrel" />
 
 <!-- Various strips -->
 <Image id="PROJECTILEPEA" path="projectilepea" />
 <Image id="PROJECTILESNOWPEA" path="projectilesnowpea" />
+<Image id="NONE" path="projectilenone" />
 <Image id="PROJECTILECACTUS" path="ProjectileCactus" />
 <Image id="DIRTSMALL" path="dirtsmall" cols="8" rows="2" />
 <Image id="DIRTBIG" path="dirtbig" cols="4" rows="2" />
